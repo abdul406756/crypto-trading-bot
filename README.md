@@ -120,4 +120,6 @@ Dashboard charts provide a visual overview of trading and account performance.
 
 The Telegram control panel provides remote monitoring and management of the trading system, including bot controls, status checks, open trades, logs, balance, trade history, and error monitoring.
 
-![Telegram Control Panel](images/telegram-control-panel.png)
+<p align="center">
+  <img src="images/telegram-control-panel.png" width="450" alt="Telegram Control Panel">
+</p>
