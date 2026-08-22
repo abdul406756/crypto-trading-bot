@@ -1,0 +1,29 @@
+name: Python Code Check
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Get code
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+
+      - name: Check Python syntax
+        run: |
+          python -m py_compile crypto_bot.py
+          python -m py_compile api.py
+          python -m py_compile api_docker.py
+          python -m py_compile control_panel_bot.py
+          python -m py_compile docker_control_panel_bot.py
+          python -m py_compile database.py

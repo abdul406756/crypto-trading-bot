@@ -1,0 +1,1160 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+<title>Crypto Bot Dashboard</title>
+
+<link rel="stylesheet" href="/static/style.css?v=20260810-2">
+
+<meta http-equiv="refresh" content="60">
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+</head>
+
+
+<body>
+<div class="dashboard-container">
+
+<div class="header">
+
+<div class="brand">
+
+<div class="logo">🤖</div>
+
+<div>
+<h1>Crypto Bot Dashboard</h1>
+<p>Automate. Trade. Profit.</p>
+</div>
+
+</div>
+
+
+<div class="header-icons">
+
+<span>🔔</span>
+<span>❓</span>
+<span>📊</span>
+
+</div>
+
+</div>
+
+<div class="top-status">
+
+
+<div class="status-box">
+
+<div>
+<h3>🌐 Connection</h3>
+<p class="green">🟢 Connected</p>
+</div>
+
+<div class="status-icon green-icon">
+📶
+</div>
+
+</div>
+
+
+
+<div class="status-box">
+
+<div>
+<h3>🛡 API Status</h3>
+<p class="green">🟢 OK</p>
+</div>
+
+<div class="status-icon shield-icon">
+🛡
+</div>
+
+</div>
+
+
+
+<div class="status-box">
+
+<div>
+<h3>🕒 Last Updated</h3>
+<p>Just now</p>
+</div>
+
+<div class="status-icon">
+◷
+</div>
+
+</div>
+
+
+</div>
+
+
+
+<!-- BOT CONTROL -->
+
+<div class="controls">
+
+<h2>🎮 Bot Control</h2>
+
+
+<button onclick="controlBot('start')">
+▶️ Start
+</button>
+
+
+<button onclick="controlBot('stop')">
+⏹ Stop
+</button>
+
+
+<button onclick="controlBot('restart')">
+🔄 Restart
+</button>
+
+
+<button onclick="controlBot('kill')">
+☠️ Kill
+</button>
+
+
+<button onclick="checkStatus()">
+📊 Status
+</button>
+
+
+<p id="botResult"></p>
+
+
+</div>
+
+
+
+
+
+<!-- STATISTICS -->
+
+<div class="cards">
+
+
+<!-- BOT STATUS -->
+
+<div class="card metric-card">
+
+<div class="card-top">
+
+<h3>🤖 Bot Status</h3>
+
+<span class="status-dot"></span>
+
+</div>
+
+<h2 id="liveStatus">
+Checking...
+</h2>
+
+</div>
+
+
+
+
+<!-- BALANCE -->
+
+<div class="card metric-card">
+
+<div class="card-top">
+
+<h3>💰 Balance</h3>
+
+<div class="mini-graph green-graph"></div>
+
+</div>
+
+
+<p class="small-text">
+USDT
+</p>
+
+
+<h2>
+{{ balance }}
+</h2>
+
+
+</div>
+
+
+
+
+
+<!-- TOTAL TRADES -->
+
+<div class="card metric-card open-trades-card">
+
+
+<div class="card-top">
+
+<h3>📊 Total Trades</h3>
+
+<div class="mini-graph blue-graph"></div>
+
+</div>
+
+
+<h2>
+{{ total_trades }}
+</h2>
+
+
+</div>
+
+
+
+
+
+<!-- OPEN TRADES -->
+
+<div class="card metric-card">
+
+    <div class="card-top">
+
+        <h3>🟢 Open Trades</h3>
+
+        <div class="open-trade-visual">
+        <span></span>
+        <span></span>
+        <span></span>
+        </div>
+
+    </div>
+
+    <h2>
+        {{ open_trades }}
+    </h2>
+
+</div>
+
+
+
+
+
+
+<!-- CLOSED TRADES -->
+
+
+<div class="card metric-card">
+
+
+<div class="card-top">
+
+<h3>🔵 Closed Trades</h3>
+
+<div class="circle-icon">
+✓
+</div>
+
+</div>
+
+
+<h2>
+{{ closed_trades }}
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<!-- TOTAL PROFIT -->
+
+
+<div class="card metric-card">
+
+
+<div class="card-top">
+
+<h3>💵 Total Profit</h3>
+
+<div class="profit-icon">
+↘
+</div>
+
+</div>
+
+
+<h2 class="green">
+
+{{ total_profit }}
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<!-- WIN RATE -->
+
+
+<div class="card metric-card">
+
+
+<div class="card-top">
+
+<h3>🎯 Win Rate</h3>
+
+<div class="target-icon">
+◎
+</div>
+
+</div>
+
+
+<h2>
+
+{{ win_rate }}%
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+<!-- WINNING -->
+
+
+<div class="card metric-card">
+
+
+<div class="card-top">
+
+<h3>📈 Winning Trades</h3>
+
+<div class="mini-graph green-graph"></div>
+
+</div>
+
+
+<h2 class="green">
+
+{{ winning_trades }}
+
+</h2>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- LOSING -->
+
+
+<div class="card metric-card">
+
+
+<div class="card-top">
+
+<h3>📉 Losing Trades</h3>
+
+<div class="mini-graph red-graph"></div>
+
+</div>
+
+
+<h2 class="red">
+
+{{ losing_trades }}
+
+</h2>
+
+
+</div>
+
+
+
+
+</div>
+
+
+
+
+
+<!-- AI + BOT ACTIVITY -->
+
+<div class="feature-grid">
+
+
+<div class="feature-card ai-card">
+
+<h3>🤖 AI Market Insight <span class="badge">BETA</span></h3>
+
+<div class="ai-content">
+
+<div>
+
+<p>Market sentiment is</p>
+
+<h2 class="{% if 'Bullish' in market_signal %}green{% elif 'Bearish' in market_signal %}red{% endif %}">
+{{ market_signal }}
+</h2>
+
+<p>
+Confidence: {{ signal_confidence }}%
+</p>
+
+<div class="progress">
+<div></div>
+</div>
+
+</div>
+
+
+<div class="ai-orb">
+🌐
+</div>
+
+
+</div>
+
+</div>
+
+
+
+
+
+<div class="feature-card activity-card">
+
+<h3>
+⚙️ Live Bot Activity
+
+<span class="live">
+● Live
+</span>
+
+</h3>
+
+
+<div class="activity-content">
+
+
+<div>
+
+<p>Status</p>
+<p>Status</p>
+<h4 id="activityStatus" class="green">
+Checking...
+</h4>
+
+<p>Trades Today</p>
+<h4>{{ total_trades }}</h4>
+
+<p>Signals Processed</p>
+<h4>{{ signals_processed }}</h4>
+
+<p>Success Rate</p>
+<h4 class="green">
+{{ win_rate }}%
+</h4>
+
+
+</div>
+
+
+<div class="bars">
+
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+<span></span>
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+</div>
+
+
+
+<!-- CHARTS -->
+
+
+<div class="chart-card">
+
+
+<div class="chart-header">
+
+<h2>📈 Balance History (USDT)</h2>
+
+
+<div class="time-buttons">
+
+<button>1H</button>
+<button>4H</button>
+<button>1D</button>
+<button>1W</button>
+
+</div>
+
+
+</div>
+
+
+<canvas id="balanceChart"></canvas>
+
+
+</div>
+
+
+
+
+
+<div class="chart-card">
+
+
+<div class="chart-header">
+
+
+<h2>📊 Profit History (USDT)</h2>
+
+
+<div class="time-buttons">
+
+<button>1H</button>
+<button>4H</button>
+<button>1D</button>
+<button>1W</button>
+
+</div>
+
+
+</div>
+
+
+<canvas id="profitChart"></canvas>
+
+
+</div>
+
+
+
+
+
+
+
+<!-- TRADES -->
+
+
+<h2>📋 Recent Trades</h2>
+
+
+<table>
+
+
+<tr>
+
+<th>Symbol</th>
+
+<th>Side</th>
+
+<th>Entry Price</th>
+
+<th>Quantity</th>
+
+<th>PnL</th>
+
+<th>Status</th>
+
+</tr>
+
+
+
+{% for trade in trades %}
+
+
+<tr>
+
+
+<td>
+{{ trade[1] }}
+</td>
+
+
+
+<td>
+
+{% if trade[2]=="BUY" %}
+
+<span class="green">
+▲ BUY
+</span>
+
+{% else %}
+
+<span class="red">
+▼ SELL
+</span>
+
+{% endif %}
+
+</td>
+
+
+
+
+<td>
+{{ "%.4f"|format(trade[3]) }}
+</td>
+
+
+
+
+<td>
+{{ "%.4f"|format(trade[5]) }}
+</td>
+
+
+
+
+<td>
+
+{% if trade[6] is not none %}
+
+    {% if trade[6] >= 0 %}
+
+    <span class="green">
+    +{{ "%.2f"|format(trade[6]) }}
+    </span>
+
+    {% else %}
+
+    <span class="red">
+    {{ "%.2f"|format(trade[6]) }}
+    </span>
+
+    {% endif %}
+
+
+{% else %}
+
+<span>
+-
+</span>
+
+{% endif %}
+
+
+</td>
+
+
+
+
+
+<td>
+
+{% if trade[7]=="OPEN" %}
+
+<span class="green">
+OPEN
+</span>
+
+{% else %}
+
+<span>
+CLOSED
+</span>
+
+{% endif %}
+
+</td>
+
+
+
+</tr>
+
+
+{% endfor %}
+
+
+</table>
+
+
+
+
+
+
+
+
+<!-- ALL JAVASCRIPT -->
+
+
+<script>
+
+// =====================
+// Balance Chart (Last 60 Minutes)
+// =====================
+
+fetch('/balance_chart')
+
+.then(response => response.json())
+
+.then(data => {
+
+
+let records = data.balance.slice(-60);
+
+
+let labels = [];
+
+let values = [];
+
+
+
+records.forEach(item => {
+
+
+    let date = new Date(item.time);
+
+
+    labels.push(
+
+        String(date.getHours()).padStart(2,'0')
+        +
+        ":"
+        +
+        String(date.getMinutes()).padStart(2,'0')
+
+    );
+
+
+    values.push(
+
+        Number(item.balance).toFixed(2)
+
+    );
+
+
+});
+
+
+
+
+
+new Chart(
+
+document.getElementById('balanceChart'),
+
+{
+
+
+type:'line',
+
+
+data:{
+
+
+labels:labels,
+
+
+datasets:[
+{
+label:'USDT Balance',
+data:values,
+
+borderColor:'#22c55e',
+
+backgroundColor:'rgba(34,197,94,0.25)',
+
+borderWidth:3,
+
+tension:0.4,
+
+fill:true,
+
+pointRadius:3,
+
+pointBackgroundColor:'#22c55e'
+}
+]
+
+
+},
+
+
+
+options:{
+
+
+responsive:true,
+
+
+plugins:{
+
+
+legend:{
+
+display:true
+
+}
+
+},
+
+
+
+scales:{
+
+
+x:{
+
+
+ticks:{
+
+maxTicksLimit:10
+
+}
+
+},
+
+
+
+y:{
+
+
+beginAtZero:false
+
+
+}
+
+
+}
+
+
+
+}
+
+
+}
+
+
+);
+
+
+
+});
+
+
+
+
+
+// =====================
+// Profit Chart (Last 60 Records)
+// =====================
+
+
+fetch('/profit_chart')
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+let records = data.profit.slice(-60);
+
+
+
+let labels = [];
+
+let values = [];
+
+
+
+records.forEach(item=>{
+
+
+let date = new Date(item.time);
+
+
+
+labels.push(
+
+String(date.getHours()).padStart(2,'0')
++
+":"
++
+String(date.getMinutes()).padStart(2,'0')
+
+);
+
+
+
+values.push(
+
+Number(item.profit).toFixed(2)
+
+);
+
+
+
+});
+
+
+
+
+
+new Chart(
+
+document.getElementById('profitChart'),
+
+{
+
+
+type:'line',
+
+
+data:{
+
+
+labels:labels,
+
+
+datasets:[
+{
+label:'Profit',
+data:values,
+
+borderColor:'#a855f7',
+
+backgroundColor:'rgba(168,85,247,0.25)',
+
+borderWidth:3,
+
+tension:0.4,
+
+fill:true,
+
+pointRadius:3,
+
+pointBackgroundColor:'#a855f7'
+}
+]
+
+
+},
+
+
+
+options:{
+
+
+responsive:true,
+
+
+plugins:{
+
+
+legend:{
+
+display:true
+
+}
+
+},
+
+
+
+scales:{
+
+
+x:{
+
+
+ticks:{
+
+maxTicksLimit:10
+
+}
+
+},
+
+
+
+y:{
+
+
+beginAtZero:true
+
+}
+
+
+}
+
+
+
+}
+
+
+}
+
+
+);
+
+
+
+});
+
+
+// =====================
+// Bot Control
+// =====================
+
+
+function controlBot(action){
+
+
+fetch("/control/"+action,{
+
+method:"POST"
+
+})
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+document.getElementById("botResult").innerHTML =
+
+JSON.stringify(data);
+
+
+});
+
+
+}
+
+
+
+
+
+
+function checkStatus(){
+
+
+fetch("/status")
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+document.getElementById("botResult").innerHTML =
+
+JSON.stringify(data);
+
+
+});
+
+
+}
+
+
+
+
+
+
+
+
+// =====================
+// Live Bot Status
+// =====================
+
+
+function updateStatus(){
+
+
+fetch("/status")
+
+
+.then(response=>response.json())
+
+
+.then(data=>{
+
+
+let element =
+document.getElementById("liveStatus");
+
+let activityElement =
+document.getElementById("activityStatus");
+
+if(data.crypto_bot==="active"){
+
+activityElement.innerHTML="Running";
+activityElement.className="green";
+element.innerHTML="🟢 ACTIVE";
+
+element.className="green";
+
+
+}
+
+else{
+activityElement.innerHTML="Stopped";
+activityElement.className="red";
+
+element.innerHTML="🔴 STOPPED";
+
+element.className="red";
+
+
+}
+
+
+
+});
+
+
+}
+
+
+
+updateStatus();
+
+
+setInterval(updateStatus,5000);
+
+
+
+
+</script>
+
+</div>
+
+</body>
+
+</html>

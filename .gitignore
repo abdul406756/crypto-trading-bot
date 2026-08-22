@@ -1,0 +1,25 @@
+# Python
+venv/
+__pycache__/
+*.pyc
+
+# Secrets
+.env
+*.env
+trading_bot.env
+
+# Logs / generated data
+*.log
+
+# Editor/system files
+.vscode/
+.idea/
+.DS_Store
+
+# Backups
+*.backup
+*.working
+
+# Trading data
+daily_trade_summary.csv
+trade_logs.csv

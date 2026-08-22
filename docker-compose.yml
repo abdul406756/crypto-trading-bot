@@ -1,0 +1,32 @@
+services:
+
+  dashboard:
+    build: .
+    container_name: trading-dashboard
+    network_mode: host
+    env_file:
+      - /etc/trading_bot.env
+    command: uvicorn api_docker:app --host 0.0.0.0 --port 8000
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
+
+  trading_bot:
+    build: .
+    container_name: trading-bot
+    network_mode: host
+    env_file:
+      - /etc/trading_bot.env
+    command: python crypto_bot.py
+    restart: unless-stopped
+
+  control_panel:
+    build: .
+    container_name: trading-control-panel
+    network_mode: host
+    env_file:
+      - /etc/trading_bot.env
+    command: python docker_control_panel_bot.py
+    restart: unless-stopped
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock
