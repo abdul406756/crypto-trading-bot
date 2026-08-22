@@ -1,8 +1,26 @@
 # Crypto Trading Bot
 
-A Python-based crypto trading system with automated trading, a FastAPI web dashboard, PostgreSQL database, Telegram control panel, Docker deployment, and systemd deployment support.
+A Python-based automated cryptocurrency trading system featuring real-time
+trade execution, a FastAPI monitoring dashboard, PostgreSQL data storage,
+Telegram-based monitoring/control, Docker containerization, and Linux
+systemd deployment.
 
-## Main Technologies
+## 🚀 Key Features
+
+- Automated cryptocurrency trading
+- Multi-pair market monitoring
+- Real-time trading signals and alerts
+- FastAPI web dashboard
+- PostgreSQL trade data storage
+- Telegram status notifications
+- Telegram signal alerts
+- Daily trading summaries
+- Telegram control panel
+- Docker & Docker Compose deployment
+- Linux systemd deployment
+- GitHub Actions CI checks
+
+## 🛠️ Technologies
 
 - Python
 - FastAPI
@@ -11,28 +29,103 @@ A Python-based crypto trading system with automated trading, a FastAPI web dashb
 - Telegram Bot API
 - Docker
 - Docker Compose
+- Git & GitHub
+- GitHub Actions
 - Linux / Ubuntu
 - systemd
 - HTML / CSS / JavaScript
 
-## Main Components
+## 🏗️ Project Architecture
 
-- `crypto_bot.py` - trading bot
-- `api.py` - systemd dashboard backend
-- `api_docker.py` - Docker dashboard backend
-- `control_panel_bot.py` - systemd Telegram control panel
-- `docker_control_panel_bot.py` - Docker Telegram control panel
-- `database.py` - PostgreSQL integration
-- `docker-compose.yml` - Docker services
-- `Dockerfile` - Docker image configuration
+Trading Strategy
+        ↓
+   Binance API
+        ↓
+   Trading Bot
+        ↓
+   PostgreSQL
+        ↓
+   FastAPI Dashboard
 
-## Security
+Trading Bot
+   ├── Status Bot
+   ├── Signal Bot
+   └── Daily Summary Bot
 
-API keys, Telegram tokens, passwords, and other secrets are stored in environment variables and are not committed to GitHub.
+Telegram Control Panel
+   └── Start / Stop / Restart / Status
 
-## Deployment
+## 📂 Main Components
+
+- `crypto_bot.py` — main automated trading system
+- `api.py` — FastAPI dashboard backend for systemd deployment
+- `api_docker.py` — FastAPI dashboard backend for Docker deployment
+- `control_panel_bot.py` — Telegram control panel for systemd
+- `docker_control_panel_bot.py` — Telegram control panel for Docker
+- `database.py` — PostgreSQL integration
+- `docker-compose.yml` — multi-container configuration
+- `Dockerfile` — Docker image configuration
+
+## 📸 Screenshots
+
+### Trading Dashboard
+
+![Trading Dashboard](images/dashboard.png)
+
+### Telegram Control Panel
+
+![Telegram Control Panel](images/telegram-control-panel.png)
+
+### GitHub Actions
+
+![GitHub Actions](images/github-actions.png)
+
+## 🔐 Security
+
+Sensitive credentials are managed using environment variables and are not
+stored in the repository.
+
+This includes:
+
+- Exchange API credentials
+- Telegram bot tokens
+- Database credentials
+
+## 🐳 Deployment
 
 The project supports two deployment methods:
 
 1. Docker Compose
 2. Linux systemd
+
+This provides flexibility between containerized and native Linux deployment.
+
+## 🔄 Continuous Integration
+
+GitHub Actions automatically performs:
+
+- Python syntax validation
+- Docker image build validation
+
+Checks run automatically when code is pushed to the `main` branch.
+
+## 👨‍💻 Project Type
+
+**Personal / Independent Project**
+
+Designed, developed, deployed, and maintained as a practical project for
+automated trading and software engineering experience.
+
+## Screenshots
+
+### Trading Dashboard
+
+The web dashboard provides real-time monitoring of the trading system, account information, trades, and bot status.
+
+![Trading Dashboard](images/dashboard-main.png)
+
+### Trading Performance & Charts
+
+Dashboard charts provide a visual overview of trading and account performance.
+
+![Trading Performance Charts](images/dashboard-charts.png)
