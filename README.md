@@ -66,20 +66,6 @@ Telegram Control Panel
 - `docker-compose.yml` — multi-container configuration
 - `Dockerfile` — Docker image configuration
 
-## 📸 Screenshots
-
-### Trading Dashboard
-
-![Trading Dashboard](images/dashboard.png)
-
-### Telegram Control Panel
-
-![Telegram Control Panel](images/telegram-control-panel.png)
-
-### GitHub Actions
-
-![GitHub Actions](images/github-actions.png)
-
 ## 🔐 Security
 
 Sensitive credentials are managed using environment variables and are not
